@@ -13,14 +13,16 @@
         </div>
         <div class="card-body">
           <div class="row mb-3">
-            <div class="col text-center">
-              @if (is_null($perusahaan->foto_sampul_perusahaan))
-                <img src="{{ asset('assets/images/no-photo.png') }}" class="img-fluid" alt="Foto Sampul Perusahaan"
-                  draggable="false" width="600">
-              @else
-                <img src="{{ asset('storage/' . $perusahaan->foto_sampul_perusahaan) }}" alt="{{ $perusahaan->username }}"
-                  class="img-fluid" width="600" draggable="false">
-              @endif
+            <div class="col">
+              <div class="d-flex align-items-center justify-content-center">
+                @if (is_null($perusahaan->foto_sampul_perusahaan))
+                  <img src="{{ asset('assets/images/no-photo.png') }}" class="img-fluid" alt="Foto Sampul Perusahaan"
+                    draggable="false" width="600">
+                @else
+                  <img src="{{ asset('storage/' . $perusahaan->foto_sampul_perusahaan) }}"
+                    alt="{{ $perusahaan->username }}" class="img-fluid" width="600" draggable="false">
+                @endif
+              </div>
             </div>
           </div>
           <hr />
@@ -42,12 +44,19 @@
                   <tr>
                     <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Nama Perusahaan') }}</td>
                     <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
-                    <td class="border-0 fs-5 fs-md-6">{{ __($perusahaan->nama_perusahaan) }}</td>
+                    <td class="border-0 fs-5 fs-md-6">
+                      {{ __("{$perusahaan->jenis_perusahaan}. $perusahaan->nama_perusahaan") }}
+                    </td>
                   </tr>
                   <tr>
                     <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Email Perusahaan') }}</td>
                     <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
                     <td class="border-0 fs-5 fs-md-6">{{ __($perusahaan->email) }}</td>
+                  </tr>
+                  <tr>
+                    <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Kategori Perusahaan') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __($perusahaan->kategori_perusahaan) }}</td>
                   </tr>
                   <tr>
                     <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Username') }}</td>
@@ -72,14 +81,7 @@
                     <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Deskripsi') }}</td>
                     <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
                     <td class="border-0 fs-5 fs-md-6">
-                      {!! $perusahaan->deskripsi_perusahaan ?? 'Belum ada deskripsi perusahaan' !!}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Alamat') }}</td>
-                    <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
-                    <td class="border-0 fs-5 fs-md-6">
-                      {{ __($perusahaan->alamat_perusahaan) }}
+                      {!! $perusahaan->deskripsi_perusahaan ?? '-' !!}
                     </td>
                   </tr>
                 </tbody>
@@ -88,7 +90,7 @@
           </div>
           <div class="row justify-content-end">
             <div class="col">
-              <a href="{{ route('admin.perusahaan.index') }}" class="btn btn-danger">Kembali</a>
+              <a href="{{ route('admin.perusahaan.index') }}" class="btn custom-btn btn-danger">Kembali</a>
             </div>
           </div>
         </div>

@@ -1,45 +1,22 @@
 @extends('layouts.app')
 
+@push('head')
+  @vite(['resources/js/typed.js'])
+@endpush
+
 @section('container')
-  <div id="carouselExampleControls" class="carousel slide" style="min-height: 650px !important;" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{{ asset('assets/images/5.jpg') }}" style="height: 650px; object-fit: cover; object-position: bottom"
-          class="img-fluid d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h1 class="fw-bold">WELCOME TO BKK SMKN 1 KOTA BEKASI</h1>
-          <p>TEMUKAN PEKERJAAN SESUAI KOMPETENSIMU</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{{ asset('assets/images/5.jpg') }}" style="height: 650px; object-fit: cover; object-position: center"
-          class="img-fluid d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h1>Second slide label</h1>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{{ asset('assets/images/5.jpg') }}" style="height: 650px; object-fit: cover; object-position: center"
-          class="img-fluid d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h1>Third slide label</h1>
-          <p>Some representative placeholder content for the third slide.</p>
+  <div style="margin-top: 4.1rem !important;">
+    <div id="banner">
+      <div id="blur">
+        <div class="text-center col-md-6">
+          <h1 class="fw-bolder main-title"></h1>
         </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
 
   <div class="container my-4">
-    <section>
+    <section style="min-height: 60vh" class="d-flex align-items-center justify-content-center">
       <div class="row justify-content-center py-4">
         <div class="col-md-8 text-center">
           <h2 class="fs-2">Tentang Kami</h2>
@@ -52,46 +29,48 @@
 
     <hr />
 
-    <section id="cara-daftar">
-      <div class="row text-center justify-content-center pt-4">
-        <div class="col">
-          <h2>Tujuan BKK</h2>
-        </div>
-      </div>
-      <div class="row text-center justify-content-center pb-4 mt-3">
-        <div class="col-md-6 col-lg-3">
-          <div class="card mb-2">
-            <div class="card-body pb-0">
-              <p class="custom-font">
-                Sebagai wadah dalam mempertemukan tamatan dengan pencari kerja.
-              </p>
-            </div>
+    <section id="cara-daftar" style="min-height: 60vh" class="d-flex align-items-center justify-content-center">
+      <div>
+        <div class="row text-center justify-content-center pt-4">
+          <div class="col">
+            <h2>Tujuan BKK</h2>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="card mb-2">
-            <div class="card-body pb-0">
-              <p class="custom-font">
-                Memberikan layanan kepada tamatan sesuai dengan tugas dan fungsi masing-masing seksi yang ada dalam BKK.
-              </p>
+        <div class="row text-center justify-content-center pb-4 mt-3">
+          <div class="col-md-6 col-lg-3">
+            <div class="card mb-2">
+              <div class="card-body pb-0">
+                <p class="custom-font">
+                  Sebagai wadah dalam mempertemukan tamatan dengan pencari kerja.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="card mb-2">
-            <div class="card-body pb-0">
-              <p class="custom-font">
-                Sebagai wadah dalam pelatihan tamatan yang sesuai dengan permintaan pencari kerja.
-              </p>
+          <div class="col-md-6 col-lg-3">
+            <div class="card mb-2">
+              <div class="card-body pb-0">
+                <p class="custom-font">
+                  Memberikan layanan kepada tamatan sesuai dengan tugas dan fungsi masing-masing seksi yang ada dalam BKK.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="card mb-2">
-            <div class="card-body pb-0">
-              <p class="custom-font">
-                Sebagai wadah untuk menanamkan jiwa wirausaha bagi tamatan melalui pelatihan.
-              </p>
+          <div class="col-md-6 col-lg-3">
+            <div class="card mb-2">
+              <div class="card-body pb-0">
+                <p class="custom-font">
+                  Sebagai wadah dalam pelatihan tamatan yang sesuai dengan permintaan pencari kerja.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card mb-2">
+              <div class="card-body pb-0">
+                <p class="custom-font">
+                  Sebagai wadah untuk menanamkan jiwa wirausaha bagi tamatan melalui pelatihan.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -100,7 +79,7 @@
 
     <hr />
 
-    <section id="perusahaan" class="mb-5">
+    <section id="perusahaan" class="py-6">
       <div class="row text-center justify-content-center pt-4">
         <div class="col mb-4">
           <h2>Perusahaan</h2>
@@ -109,7 +88,7 @@
       </div>
 
       <div class="row">
-        <div class="card-group owl-carousel owl-theme">
+        <div class="card-group @if ($perusahaan->count() > 0) owl-carousel owl-theme @endif">
           @forelse ($perusahaan as $item)
             <div class="card mx-1">
               <img src="{{ $item->logo_perusahaan ?? asset('assets/images/no-photo.png') }}"
@@ -122,7 +101,9 @@
               </div>
             </div>
           @empty
-            Hehe
+            <div class="alert custom-font alert-warning w-full" role="alert">
+              Perusahaan masih kosong.
+            </div>
           @endforelse
         </div>
       </div>
@@ -130,18 +111,18 @@
 
     <hr />
 
-    <section id="lowongan-kerja" class="pb-5">
+    <section id="lowongan-kerja" class="py-6">
       <div class="row text-center justify-content-center pt-4">
         <div class="col">
-          <h2 class="mb-5">Lowongan Tersedia</h2>
+          <h2 class="mb-5">Loker Terbaru</h2>
         </div>
       </div>
 
       <div class="row">
-        <div class="card-group owl-carousel owl-theme">
+        <div class="card-group @if ($lowongan->count() > 0) owl-carousel owl-theme @endif">
           @forelse ($lowongan as $item)
             <div class="card mx-1">
-              <img src="{{ $item->perusahaan->logo_perusahaan ?? asset('assets/images/no-photo.png') }}"
+              <img src="{{ $item->banner ? asset("storage/{$item->banner}") : asset('assets/images/no-photo.png') }}"
                 class="card-img-top img-thumbnail" alt="{{ $item->judul_lowongan }}">
               <div class="card-body ">
                 <a class="card-title text-decoration-none text-black font-bolder stretched-link"
@@ -159,40 +140,42 @@
               </div>
             </div>
           @empty
-            Hehe
+            <div class="alert custom-font alert-warning w-full" role="alert">
+              Loker masih kosong.
+            </div>
           @endforelse
         </div>
       </div>
     </section>
   </div>
-
-  @push('script-owl')
-    <script>
-      $(document).ready(function() {
-        $(".owl-carousel").owlCarousel({
-          loop: true,
-          margin: 10,
-          responsiveClass: true,
-          nav: true,
-          stagePadding: 50,
-          mouseDrag: true,
-          touchDrag: true,
-          responsive: {
-            0: {
-              items: 1
-            },
-            500: {
-              items: 2,
-            },
-            768: {
-              items: 3,
-            },
-            1024: {
-              items: 4,
-            }
-          }
-        });
-      });
-    </script>
-  @endpush
 @endsection
+
+@push('script-owl')
+  <script>
+    $(document).ready(function() {
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        nav: true,
+        stagePadding: 50,
+        mouseDrag: true,
+        touchDrag: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          500: {
+            items: 2,
+          },
+          768: {
+            items: 3,
+          },
+          1024: {
+            items: 4,
+          }
+        }
+      });
+    });
+  </script>
+@endpush

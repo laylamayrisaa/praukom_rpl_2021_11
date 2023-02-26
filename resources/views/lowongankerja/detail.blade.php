@@ -8,6 +8,14 @@
           <h2>Detail Lowongan Kerja</h2>
         </div>
         <div class="card-body">
+          @if (!is_null($lowonganKerja->banner))
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <img src="{{ $lowonganKerja->banner }}" alt="" width="600">
+              </div>
+            </div>
+            <hr />
+          @endif
           <div class="row gap-4 gap-lg-0">
             <div class="col-lg-9">
               <table class="table table-responsive">
@@ -17,6 +25,11 @@
                     <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
                     <td class="border-0 fs-5 fs-md-6">{{ __($lowonganKerja->judul_lowongan) }}</td>
                   </tr>
+                  <tr>
+                    <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Posisi') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __($lowonganKerja->posisi) }}</td>
+                  </tr>
                   @can('admin')
                     <tr>
                       <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Nama Perusahaan') }}</td>
@@ -25,20 +38,14 @@
                     </tr>
                   @endcan
                   <tr>
+                    <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Estimasi Gaji') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __($lowonganKerja->estimasi_gaji) }}</td>
+                  </tr>
+                  <tr>
                     <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Deskripsi Lowongan') }}</td>
                     <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
                     <td class="border-0 fs-5 fs-md-6">{{ __($lowonganKerja->deskripsi_lowongan) }}</td>
-                  </tr>
-                  <tr>
-                    <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Tanggal Dimulai') }}</td>
-                    <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
-                    <td class="border-0 fs-5 fs-md-6">
-                      @if (is_null($lowonganKerja->tanggal_dimulai))
-                        {{ __('Data tanggal dimulai tidak ada') }}
-                      @else
-                        {{ \Carbon\Carbon::parse($lowonganKerja->tanggal_dimulai)->format('d M Y') }}
-                      @endif
-                    </td>
                   </tr>
                   <tr>
                     <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Tanggal Berakhir') }}</td>
@@ -51,13 +58,58 @@
                       @endif
                     </td>
                   </tr>
+                  <tr>
+                    <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Lokasi Kerja') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __($lowonganKerja->kantor->alamat_kantor) }}</td>
+                  </tr>
+                  <tr>
+                    <td class="border-0 fs-5 fs-md-6 text-nowrap">{{ __('Status') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">{{ __(':') }}</td>
+                    <td class="border-0 fs-5 fs-md-6">
+                      @if (!$lowonganKerja->is_finished)
+                        {{ __('Belum Selesai') }}
+                      @else
+                        {{ __('Selesai') }}
+                      @endif
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          <div class="row justify-content-end">
-            <div class="col">
-              <a href="{{ route('lowongankerja.index') }}" class="btn btn-danger">Kembali</a>
+          <div class="row gap-3 gap-lg-0">
+            <div class="col-lg-3">
+              <a href="{{ route('lowongankerja.index') }}" class="btn w-full custom-btn btn-danger">
+                Kembali
+              </a>
+            </div>
+            @can('perusahaan')
+              @if (!$lowonganKerja->is_finished)
+                <div class="col-lg-3">
+                  <a href="{{ route('lowongankerja.see-stages', $lowonganKerja->slug) }}"
+                    class="btn w-full custom-btn btn-primary ">
+                    Seleksi Pendaftar
+                  </a>
+                </div>
+              @else
+                <div class="col-lg-3">
+                  <a href="" class="btn w-full custom-btn btn-primary ">
+                    Lihat Pendaftar yang diterima
+                  </a>
+                </div>
+              @endif
+            @endcan
+            <div class="col-lg-3">
+              <a href="{{ route('lowongankerja.see-applicant', $lowonganKerja->slug) }}"
+                class="btn w-full custom-btn btn-info">
+                Lihat Pendaftar
+              </a>
+            </div>
+            <div class="col-lg-3">
+              <a href="{{ route('lowongankerja.index') }}" class="btn w-full custom-btn btn-success">
+                Lihat Rekomendasi
+              </a>
             </div>
           </div>
         </div>

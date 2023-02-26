@@ -5,27 +5,24 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
-  public function up() {
-    Schema::create('gelar_pendidikan', function (Blueprint $table) {
-      $table->engine = env('DB_STORAGE_ENGINE', 'InnoDB');
-      $table->charset = env('DB_CHARSET', 'utf8mb4');
-      $table->collation = env('DB_COLLATION', 'utf8mb4_general_ci');
-      $table->uuid('id_gelar')->primary();
-      $table->string('nama_gelar', 50);
-    });
-  }
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up(): void {
+        Schema::create('gelar_pendidikan', function (Blueprint $table) {
+            $table->uuid('id_gelar')->primary();
+            $table->string('nama_gelar', 50);
+        });
+    }
 
-  /**
-   * Reverse the migrations.
-   *
-   * @return void
-   */
-  public function down() {
-    Schema::dropIfExists('tingkatan_pendidikan');
-  }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down(): void {
+        Schema::dropIfExists('tingkatan_pendidikan');
+    }
 };

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,33 +9,56 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DokumenPengguna extends Model {
-  use HasFactory;
+    use HasFactory;
 
-  // kasih tau tabel yang ada di databasenya
-  protected $table = 'dokumen_pengguna';
+    /**
+     * Set the table name
+     *
+     * @var string
+     */
+    protected $table = 'dokumen_pengguna';
 
-  // kasih tau primary key yang ada di tabel yang bersangkutan
-  protected $primaryKey = 'id_dokumen_pengguna';
+    /**
+     * Set the primary key
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_dokumen_pengguna';
 
-  // set timestamps menjadi false, karena kalau pakai model otomatis dia memasukkan timestamps juga
-  public $timestamps = false;
+    /**
+     * Set the timestamps
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array<int, string>
-   */
-  protected $fillable = [
-    'id_pelamar',
-    'id_jenis_dokumen',
-    'nama_file'
-  ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id_pelamar',
+        'id_jenis_dokumen',
+        'nama_file',
+        'public_id',
+    ];
 
-  public function jenis_dokumen(): BelongsTo {
-    return $this->belongsTo(Dokumen::class, 'id_jenis_dokumen', 'id_jenis_dokumen');
-  }
+    /**
+     * Get the jenis dokumen for the dokumen pengguna.
+     *
+     * @return BelongsTo
+     */
+    public function jenis_dokumen(): BelongsTo {
+        return $this->belongsTo(Dokumen::class, 'id_jenis_dokumen', 'id_jenis_dokumen');
+    }
 
-  public function pelamar(): BelongsTo {
-    return $this->belongsTo(Pelamar::class, 'id_pelamar', 'id_pelamar');
-  }
+    /**
+     * Get the pelamar for the dokumen pengguna.
+     *
+     * @return BelongsTo
+     */
+    public function pelamar(): BelongsTo {
+        return $this->belongsTo(Pelamar::class, 'id_pelamar', 'id_pelamar');
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,40 +9,70 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AdminBKK extends Model {
-  use HasFactory;
+    use HasFactory;
 
-  // kasih tau tabel yang ada di databasenya
-  protected $table = 'admin_bkk';
+    /**
+     * Set the table name
+     *
+     * @var string
+     */
+    protected $table = 'admin_bkk';
 
-  // kasih tau primary key yang ada di tabel yang bersangkutan
-  protected $primaryKey = 'id_admin';
+    /**
+     * Set the primary key
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_admin';
 
-  // set timestamps menjadi false, karena kalau pakai model otomatis dia memasukkan timestamps juga
-  public $timestamps = false;
+    /**
+     * Set the timestamps
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
-  // kasih tau kalau primary key nya bukan integer AI
-  public $incrementing = false;
+    /**
+     * Set the incrementing
+     *
+     * @var boolean
+     */
+    public $incrementing = false;
 
-  // kasih tau kalau primary key nya bukan bertipe integer
-  protected $keyType = 'string';
+    /**
+     * Set the key type
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array<int, string>
-   */
-  protected $fillable = [
-    'id_admin',
-    'id_user',
-    'nama_admin',
-    'nip'
-  ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id_admin',
+        'id_user',
+        'nama_admin',
+        'nip'
+    ];
 
-  public function user(): BelongsTo {
-    return $this->belongsTo(User::class, 'id_user', 'id_user');
-  }
+    /**
+     * Get the user who are AdminBKK
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
+    }
 
-  public function getRouteKeyName() {
-    return 'id_admin';
-  }
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string {
+        return 'id_admin';
+    }
 }

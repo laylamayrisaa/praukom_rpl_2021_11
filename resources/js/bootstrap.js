@@ -1,6 +1,9 @@
 import _ from "lodash";
 import "bootstrap";
+import AOS from "aos";
+import "boxicons";
 
+AOS.init();
 window._ = _;
 
 /**

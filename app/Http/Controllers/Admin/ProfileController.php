@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminBKK;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller {
-  public function index(AdminBKK $admin) {
-    return view('admin.profile.index', compact('admin'));
-  }
+final class ProfileController extends Controller {
+    public function index(AdminBKK $admin): View {
+        return view('admin.profile.index', compact('admin'));
+    }
 
-  public function update(Request $request, AdminBKK $admin) {
-    $request->validate(['nama_admin' => 'required|min:5|max:255', 'nip' => 'required']);
-    $validatedData = $request->only('nama_admin', 'nip');
-    $admin->update($validatedData);
-    return back()->with('sukses', 'Berhasil memperbarui data');
-  }
+    public function update(Request $request, AdminBKK $admin): RedirectResponse {
+        $request->validate(['nama_admin' => 'required|min:5|max:255', 'nip' => 'required']);
+        $validatedData = $request->only('nama_admin', 'nip');
+        $admin->update($validatedData);
+
+        return back()->with('sukses', 'Berhasil memperbarui data');
+    }
 }

@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
           <x-alert-error-validation />
-          <form action="{{ route('admin.alumni.update', $alumni->username) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('admin.alumni.update', $user->username) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="mb-3 row">
@@ -36,7 +36,7 @@
               </label>
               <div class="col-sm-8">
                 <select name="jenis_kelamin" id="jenis_kelamin" class="form-select" required>
-                  <option selected>-- Pilih jenis kelamin --</option>
+                  <option selected disabled hidden>-- Pilih jenis kelamin --</option>
                   <option value="L" @if ($alumni->jenis_kelamin === 'L') @selected(true) @endif>Laki-laki</option>
                   <option value="P" @if ($alumni->jenis_kelamin === 'P') @selected(true) @endif>Perempuan</option>
                 </select>
@@ -48,9 +48,9 @@
               </label>
               <div class="col-sm-8">
                 <select name="jurusan" id="jurusan" class="form-select" required>
-                  <option selected value="">-- Pilih Jurusan --</option>
+                  <option selected disabled hidden>-- Pilih Jurusan --</option>
                   @foreach ($jurusan as $item)
-                    <option value="{{ $item->id_jurusan }}" @if ($item->id_jurusan === $alumni->id_jurusan) @selected(true) @endif>
+                    <option value="{{ $item->id_jurusan }}" @selected($item->id_jurusan === $alumni->jurusan->id_jurusan)>
                       {{ $item->nama_jurusan }}
                     </option>
                   @endforeach
@@ -63,9 +63,9 @@
               </label>
               <div class="col-sm-8">
                 <select name="angkatan" id="angkatan" class="form-select" required>
-                  <option selected>-- Pilih Tahun Angkatan --</option>
+                  <option selected disabled hidden>-- Pilih Tahun Angkatan --</option>
                   @foreach ($angkatan as $item)
-                    <option value="{{ $item->id_angkatan }}" @if ($item->id_angkatan === $alumni->id_angkatan) @selected(true) @endif>
+                    <option value="{{ $item->id_angkatan }}" @selected($item->id_angkatan === $alumni->angkatan->id_angkatan)>
                       {{ $item->angkatan_tahun }}
                     </option>
                   @endforeach
@@ -113,8 +113,7 @@
               <div class="col-sm-4"></div>
               <div class="col-sm-8">
                 @if ($alumni->foto)
-                  <img class="d-block mb-3 image-preview rounded" width="300"
-                    src="{{ asset('storage/' . $alumni->foto) }}">
+                  <img class="d-block mb-3 image-preview rounded" width="300" src="{{ $alumni->foto }}">
                 @else
                   <img class="d-block image-preview rounded" width="300">
                 @endif
@@ -131,8 +130,8 @@
             <div class="row mb-3">
               <div class="col-sm-4"></div>
               <div class="col-sm-8 d-flex gap-2">
-                <button type="submit" class="btn btn-primary">Perbarui</button>
-                <a href="{{ route('admin.alumni.index') }}" class="btn btn-danger">Batal</a>
+                <button type="submit" class="custom-btn btn btn-primary">Perbarui</button>
+                <a href="{{ route('admin.alumni.index') }}" class="custom-btn btn btn-danger">Batal</a>
               </div>
             </div>
           </form>

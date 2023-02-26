@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,38 +9,68 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Dokumen extends Model {
-  use HasFactory;
+    use HasFactory;
 
-  // kasih tau tabel yang ada di databasenya
-  protected $table = 'dokumen';
+    /**
+     * Set the table name
+     *
+     * @var string
+     */
+    protected $table = 'dokumen';
 
-  // kasih tau primary key yang ada di tabel yang bersangkutan
-  protected $primaryKey = 'id_jenis_dokumen';
+    /**
+     * Set the primary key
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_jenis_dokumen';
 
-  // set timestamps menjadi false, karena kalau pakai model otomatis dia memasukkan timestamps juga
-  public $timestamps = false;
+    /**
+     * Set the timestamps
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
 
-  // kasih tau kalau primary key nya bukan integer AI
-  public $incrementing = false;
+    /**
+     * Set the incrementing
+     *
+     * @var boolean
+     */
+    public $incrementing = false;
 
-  // kasih tau kalau primary key nya bukan bertipe integer
-  protected $keyType = 'string';
+    /**
+     * Set the key type
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array<int, string>
-   */
-  protected $fillable = [
-    'id_jenis_dokumen',
-    'nama_dokumen'
-  ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id_jenis_dokumen',
+        'nama_dokumen'
+    ];
 
-  public function dokumen_pengguna(): HasMany {
-    return $this->hasMany(DokumenPengguna::class, 'id_jenis_dokumen', 'id_jenis_dokumen');
-  }
+    /**
+     * Get the dokumen pengguna for the dokumen.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dokumen_pengguna(): HasMany {
+        return $this->hasMany(DokumenPengguna::class, 'id_jenis_dokumen', 'id_jenis_dokumen');
+    }
 
-  public function getRouteKeyName() {
-    return 'id_jenis_dokumen';
-  }
+    /**
+     * Get the route key name
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string {
+        return 'id_jenis_dokumen';
+    }
 }

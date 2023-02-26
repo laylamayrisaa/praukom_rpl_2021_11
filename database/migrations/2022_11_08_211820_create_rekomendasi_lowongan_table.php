@@ -5,44 +5,43 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
-  public function up() {
-    // Ini pivot table yaa, artinya table pembantu dari relasi Many to Many
-    Schema::create('rekomendasi_lowongan', function (Blueprint $table) {
-      $table->engine = env('DB_STORAGE_ENGINE', 'InnoDB');
-      $table->charset = env('DB_CHARSET', 'utf8mb4');
-      $table->collation = env('DB_COLLATION', 'utf8mb4_general_ci');
-      $table->char('id_jurusan', 7);
-      $table->integer('id_lowongan');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up(): void {
+        // Ini pivot table yaa, artinya table pembantu dari relasi Many to Many
+        Schema::create('rekomendasi_lowongan', function (Blueprint $table) {
+            $table->integer('id_siswa');
+            $table->integer('id_lowongan');
+            $table->string('judul');
+            $table->text('deskripsi');
+            $table->unique(['id_siswa', 'id_lowongan']);
+            $table->timestamps();
 
-      // Foreign key untuk id_jurusan
-      $table
-        ->foreign('id_jurusan')
-        ->references('id_jurusan')
-        ->on('jurusan')
-        ->cascadeOnUpdate()
-        ->cascadeOnDelete();
+            // Foreign key untuk id_siswa
+            $table
+                ->foreign('id_siswa')
+                ->references('id_siswa')
+                ->on('siswa_alumni')
+                ->cascadeOnUpdate();
 
-      // Foreign key untuk id_lowongan
-      $table
-        ->foreign('id_lowongan')
-        ->references('id_lowongan')
-        ->on('lowongan_kerja')
-        ->cascadeOnUpdate()
-        ->cascadeOnDelete();
-    });
-  }
+            // Foreign key untuk id_lowongan
+            $table
+                ->foreign('id_lowongan')
+                ->references('id_lowongan')
+                ->on('lowongan_kerja')
+                ->cascadeOnUpdate();
+        });
+    }
 
-  /**
-   * Reverse the migrations.
-   *
-   * @return void
-   */
-  public function down() {
-    Schema::dropIfExists('rekomendasi_lowongan');
-  }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down(): void {
+        Schema::dropIfExists('rekomendasi_lowongan');
+    }
 };

@@ -5,34 +5,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="_token" content="{{ csrf_token() }}" />
   <link rel="icon" href="{{ asset('assets/images/sipeka_logo_2.png') }}">
 
+  <title>Beranda | SIPEKA</title>
+  @notifyCss
   @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
+
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/owl-carousel/dist/assets/owl.carousel.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/owl-carousel/dist/assets/owl.theme.default.min.css') }}">
 
   @stack('style')
-
-  <title>Beranda | SIPEKA</title>
+  @stack('head')
 </head>
 
 <body>
   @include('layouts.navigation')
-  <div class="mainlayout">
+  <div class="mainlayout" data-aos="fade-down">
     @yield('container')
   </div>
   @include('layouts.footer')
 
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-  <script src="{{ asset('assets/owl-carousel/dist/owl.carousel.min.js') }}"></script>
-  <script src="https://unpkg.com/@popperjs/core@2"></script>
-  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/owl-carousel/dist/owl.carousel.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/tippy.umd.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/disabled_inspect.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/enable_tooltip.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/navbar_blur.js') }}"></script>
 
   @stack('script-owl')
   @stack('script')
-  <script src="{{ asset('assets/js/disabled_inspect.js') }}"></script>
-  <script src="{{ asset('assets/js/enable_tooltip.js') }}"></script>
+  <x:notify-messages />
+  @notifyJs
 </body>
 
 </html>
